@@ -2,7 +2,8 @@ name: Deploy NodeJS Application to AWS EC2
 
 on:
   push:
-    branches: -main
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -17,7 +18,8 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: root
-          key: ${{ secrets.SSH_KEY}}
-          script: cd /root/nodejs-app-deploy-gh-action
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /root/nodejs-app-deploy-gh-action
             git pull
             docker compose up -d --build
